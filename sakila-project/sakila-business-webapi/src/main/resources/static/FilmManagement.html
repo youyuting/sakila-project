@@ -1,0 +1,291 @@
+<html>
+<head>
+<title>Film Management</title>
+<style>
+.username.ng-valid {
+	background-color: lightgreen;
+}
+
+.username.ng-dirty.ng-invalid-required {
+	background-color: red;
+}
+
+.username.ng-dirty.ng-invalid-minlength {
+	background-color: yellow;
+}
+
+.email.ng-valid {
+	background-color: lightgreen;
+}
+
+.email.ng-dirty.ng-invalid-required {
+	background-color: red;
+}
+
+.email.ng-dirty.ng-invalid-email {
+	background-color: yellow;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="css/app.css" rel="stylesheet"></link>
+</head>
+<body ng-app="myApp" class="ng-cloak">
+	<div class="generic-container" ng-controller="FilmController as ctrl">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead">Film Management Form</span>
+			</div>
+
+			<div class="formcontainer">
+
+				<form ng-submit="ctrl.submit()" name="myForm"
+					class="form-horizontal">
+					<legend style="text-align: left"> The movie</legend>
+
+					<!-- 			title 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="file">Film
+								title</label>
+							<div class="col-md-7">
+								<input type="text" ng-model="ctrl.film.title" name="title"
+									class="form-control input-sm" placeholder="Enter the title"
+									required />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.title.$error.required">This is a
+										required field</span> <span ng-show="myForm.title.$invalid">This
+										field is invalid </span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 			Description 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="file">Description</label>
+							<div class="col-md-7">
+								<textarea name="description" ng-model="ctrl.film.description"
+									class="form-control input-sm" rows="10" cols="50"
+									required="required"> Description </textarea>
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 			Release 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="release">Release
+								year</label>
+							<div class="col-md-7">
+								<input type="number" ng-model="ctrl.film.release" name="release"
+									class="form-control input-sm"
+									placeholder="Enter the release year" ng-maxlength="4" />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.release.$error.number">This is a
+										need a number</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="has-error" ng-show="myForm.$dirty">
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
+					</div>
+
+					<!-- 			Rental duration 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="rentalDuration">Rental
+								duration</label>
+							<div class="col-md-7">
+								<input type="number" ng-model="ctrl.film.rentalDuration"
+									name="rentalDuration" class="form-control input-sm"
+									placeholder="Enter the rental duration" min="0" max="999" />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 			Rental rate 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="rentalRate">Rental
+								rate</label>
+							<div class="col-md-7">
+								<input type="number" ng-model="ctrl.film.rentalRate"
+									name="rentalRate" class="form-control input-sm"
+									placeholder="Enter the rental rate" min="0" max="5" />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 			Lenght 			-->
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="lenght">Film
+								length</label>
+							<div class="col-md-7">
+								<input type="number" ng-model="ctrl.film.lenght" name="lenght"
+									class="form-control input-sm"
+									placeholder="Enter the film length" min="0" />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 			rating 			-->
+					<div class="row">
+						<label class="col-md-2 control-lable" for="selectRate">Select
+							the rate</label>
+						<div class="col-md-7">
+							<select name="selectRate" ng-model="ctrl.film.rate">
+								<option value="">Select the rate</option>
+								<option value="NC-17">NC-17</option>
+								<option value="PG">PG</option>
+								<option value="PG-13">PG-13</option>
+								<option value="G">G</option>
+								<option value="R">R</option>
+							</select>
+						</div>
+					</div>
+					<br>
+
+					<div class="has-error" ng-show="myForm.$dirty">
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
+					</div>
+					<!-- 			Special features 			-->
+						<legend style="text-align: left"> Special features </legend>
+						<div class="row">
+							<label class="col-md-2 control-lable" for="selectFeatures">Select
+								the special features</label>
+							<div class="col-md-7">
+								<label class="checkbox-inline"> <input type="checkbox"
+									name="trailers" value="features" />Trailers
+								</label> <label class="checkbox-inline"> <input type="checkbox"
+									name="commentaries" value="features" />Commentaries
+								</label> <label class="checkbox-inline"> <input type="checkbox"
+									name="deletedScenes" value="features" />Deleted Scenes
+								</label> <label class="checkbox-inline"> <input type="checkbox"
+									name="behindScenes" value="features" />Behind the Scenes
+								</label>
+							</div>
+						</div>
+
+					<div class="has-error" ng-show="myForm.$dirty">
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
+					</div>
+
+					<!-- 			List of actors 		-->
+						<legend style="text-align: left"> List of actors </legend>
+						<div class="row" ng-controller="ActorController as actorCtrl">
+							<label class="col-md-2 control-lable" for="file">Select
+								the actor(s)</label>
+							<div class="col-md-10">
+
+								<label ng-repeat="a in actorCtrl.casting">
+									<table style="width: 200px;">
+										<tr style="height: 20px;">
+											<td
+												style="text-align: left; vertical-align: left; font-size: 12;">
+												<input checklist-model="ctrl.film.listIdActor"
+												checklist-value="a.id" type="checkbox" ng-model="checked" />{{a.text}}<br />
+											</td>
+										</tr>
+									</table>
+								</label>
+							</div>
+						</div>
+					<!-- 			Button 			-->
+
+					<div class="row">
+						<div class="form-actions floatRight">
+							<input type="submit"
+								value="{{!ctrl.film.filmId ? 'Add' : 'Update'}}"
+								class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+							<button type="button" ng-click="ctrl.reset()"
+								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
+								Form</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">List of Films </span>
+			</div>
+			<div class="tablecontainer">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID.</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Release year</th>
+							<th>Rental duration</th>
+							<th>Rental rate</th>
+							<th>Film length</th>
+							<th>Special features</th>
+							<th width="20%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="u in ctrl.films">
+							<td><span ng-bind="u.filmId"></span></td>
+							<td><span ng-bind="u.title"></span></td>
+							<td><span ng-bind="u.description"></span></td>
+							<td><span ng-bind="u.releaseYear"></span></td>
+							<td><span ng-bind="u.rentalDuration"></span></td>
+							<td><span ng-bind="u.rentalRate"></span></td>
+							<td><span ng-bind="u.lenght"></span></td>
+							<td><span ng-bind="u.features"></span></td>
+							<td>
+								<button type="button" ng-click="ctrl.edit(u.filmId)"
+									class="btn btn-success custom-width">Edit</button>
+								<button type="button" ng-click="ctrl.remove(u.filmId)"
+									class="btn btn-danger custom-width">Remove</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/service/actor_service.js"></script>
+	<script src="js/controller/actor_controller.js"></script>
+	<script src="js/service/film_service.js"></script>
+	<script src="js/controller/film_controller.js"></script>
+	<script src="js/service/inventory_service.js"></script>
+	<script src="js/controller/inventory_controller.js"></script>
+	<script src="js/service/language_service.js"></script>
+	<script src="js/controller/language_controller.js"></script>
+	<script src="js/service/category_service.js"></script>
+	<script src="js/controller/category_controller.js"></script>
+</body>
+</html>
